@@ -1,0 +1,1 @@
+export const API_ENDPOINT = 'http://autocomplete-lyart.vercel.app/api/words';
