@@ -1,13 +1,19 @@
 // @todo debug this search endpoint
-
-import axios from "axios"
 import { API_ENDPOINT } from "../constants/constants";
 
-export const api = axios.create({
-  baseURL: API_ENDPOINT,
-  headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-  },
-  withCredentials: false,
-});
+export const fetchRequest = async (value: string) => {
+  try {
+    const res = await fetch(`${API_ENDPOINT}?query=${value}`, {
+      method: 'GET'
+    });
+
+    const data = await res.json();
+
+    return { 
+      data
+    }
+  } catch (error) {
+    console.error('Fetch error: ', error);
+    throw error;
+  }
+}
