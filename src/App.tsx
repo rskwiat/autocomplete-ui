@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import type { ChangeEvent } from "react";
+import { ToastContainer } from "react-toastify";
+
 import { fetchRequest } from "./utils/api";
 
 import SearchInput from "./components/SearchInput";
 import Results from "./components/Results";
-import { ToastContainer, toast } from 'react-toastify';
 
 function App() {
   const [searchInput, setSearchInput] = useState('');
@@ -18,13 +19,14 @@ function App() {
   useEffect(() => {
     const handleSearch = async () => {
       if (searchInput.length > 3) {
-        const { data } = await fetchRequest(searchInput);
+        const { data, status } = await fetchRequest(searchInput);
 
-        if (data.length === 0) {
-          setError('No related words found')
+        if (data.length === 0 && status === 200) {
+          setError("No Results Found");
         }
-        // @todo show error state if array is empty
-        if (data) {
+
+        if (data.length > 0 && status === 200) {
+          setError("");
           setResults(data);
         }
       };
@@ -40,7 +42,9 @@ function App() {
         hideProgressBar
       />
       <div className="flex flex-col items-center justify-center h-screen">
-        <h1>Materia Auto Complete</h1>
+        <h1 className="text-4xl font-bold mb-4 antialiased">
+          Materia Auto Complete
+        </h1>
         <SearchInput
           label='Keyword Search'
           onChange={onChange}

@@ -9,9 +9,10 @@ export const fetchRequest = async (value: string) => {
 
     const data = await res.json();
 
-    return { 
+    return {
+      status: res.status,
       data
-    }
+    };
   } catch (error) {
     console.error('Fetch error: ', error);
     throw error;

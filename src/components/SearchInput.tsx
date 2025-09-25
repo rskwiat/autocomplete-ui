@@ -10,13 +10,13 @@ export default function SearchInput({
   label
 }: SearchInputProps) {
   return (
-    <fieldset className="">
+    <fieldset className="mb-4 w-xl">
       <label
         htmlFor={label}
       />
       <input
-        type='search'
-        className="border-solid p-4 border-2"
+        type="search"
+        className="block p-4 w-full text-gray-900 border order-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500"
         onChange={onChange}
       />
     </fieldset>
